@@ -30,7 +30,6 @@ void jobSequencing(Job arr[], int n) {
     }
 
     int maxProfit = 0;
-
     // iterate thru all the jobs
     for (int i = 0; i < n; i++)
     {
