@@ -1,5 +1,4 @@
 // 2. Implement job sequencing with deadlines using a greedy method.
-
 #include <iostream>
 #include <algorithm>
 using namespace std;
@@ -16,18 +15,16 @@ bool comparison(Job a, Job b) {
     return a.profit > b.profit;
 }
 
+
+// Returns maximum profit from jobs
 void jobSequencing(Job arr[], int n) {
     // sort jobs by profit in descending order
-   
     sort(arr, arr + n, comparison);
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i].id << " " << arr[i].deadline <<" "    <<     arr[i].profit << endl;
-    }
-    cout << endl;
-   
-    int result[n];
-    bool slot[n];
+
+    int result[n]; // To store result (Sequence of jobs)
+	bool slot[n]; // To keep track of free time slots
+
+	// Initialize all slots to be free
     for (int i = 0; i < n; i++) {
         slot[i] = false;
     }
@@ -37,53 +34,64 @@ void jobSequencing(Job arr[], int n) {
     // iterate thru all the jobs
     for (int i = 0; i < n; i++)
     {
-        // find a free slot for the current job (starting from the last possible slot)
+        // Find a free slot for this job (Note that we start
+		// from the last possible slot)
         for (int j = min(n, arr[i].deadline) - 1; j >= 0; j--)
         {
             // if slot is free assingn this job to that slot
             if (slot[j] == false)
             {
-                result[j] = i;
-                slot[j] = true;
+                //free slot found
+                result[j] = i; // Add this job to result
+				slot[j] = true; // Make this slot occupied
                 maxProfit += arr[i].profit;
                 break;
             }
         }
     }
-
     // print the selected job sequence and max profit
     cout << "Selected jobs sequence: " <<endl;
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++) { 
         if(slot[i] == true) {
             cout << arr[result[i]].id << " ";
         }
-
     }
-    cout << "Maximum Profit : " << maxProfit;
-
+    cout << "\nMaximum Profit : " << maxProfit;
 }
 
 int main() {
     
-    Job jobs[] = { { 'a', 2, 100 },
-                   { 'b', 1, 19 },
-             { 'c', 2, 27 },
-             { 'd', 1, 25 },
-             { 'e', 3, 15 }
-             };
-    int n = sizeof(jobs) / sizeof(jobs[0]);
-    
-    jobSequencing(jobs, n);
+    int choice;
+    do { 
+        cout << "Menu: " << endl;
+        cout << "1. Enter Job Details" << endl;
+        cout << "2. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        if(choice == 1) {
+            stepCount = 0;
+            cout << "Enter the number of Jobs: " << endl;
+            cin >> n;
+            Job jobs[n];
+            cout << "Enter details :" << endl;
+            for(int i = 0; i < n; i++) {
+                cout << "Job " << i + 1 << "(ID Deadline Profit)";
+                cin >> jobs[i].id >> jobs[i].deadline >> jobs[i].profit;
+            }
+            jobSequencing(jobs, n);
+        }   
+       
+    } while(choice != 2);  
+
     return 0;
 }
-///INPUT- BASED
-// int n
-    // cout  << "Enter number of jobs : ";
-    // cin >> n;
-// input the job details
-    // cout << "Enter the Job ID, profit, deadline for each job" << endl;
-
-    // for (int i = 0; i < n; i++) {
-    //     cout << "Job " << i + 1 << "(ID Profit Deadline)";
-    //     cin >> jobs[i].id >> jobs[i].profit >> jobs[i].deadline;
-    // }
+// direct code run sathi
+// Job jobs[] = { { 'a', 2, 100 },
+//                { 'b', 1, 19 },
+//                {'c', 2, 27 },
+//                {'d', 1, 25 },
+//                {'e', 3, 15 }
+//              };
+//int n = sizeof(jobs) / sizeof(jobs[0]);
+//jobSequencing(jobs, n);
