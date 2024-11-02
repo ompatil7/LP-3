@@ -6,10 +6,10 @@ struct Item {
     int profit;
     int weight;
 
-    Item(int profit, int weight) {
-        this->weight = weight;
-        this->profit = profit;
-    }
+    // Item(int profit, int weight) {
+    //     this->weight = weight;
+    //     this->profit = profit;
+    // }
 };
 // comparison function to sort items according to profit/weight ratio
 static bool cmp(struct Item a, struct Item b) {
@@ -43,8 +43,34 @@ double fractionalKnapsack(int capacity, struct Item arr[], int n) {
 
 int main()
 {
-    Item items[] = {{60, 10}, {100, 20}, {120, 30}};
-    int n = 3;
-    int W = 50;
-    cout << fractionalKnapsack(W, items, n);
+    int choice;
+    int n;
+    int W;
+    do { 
+        cout << "Menu: " << endl;
+        cout << "1. Enter Item Details" << endl;
+        cout << "2. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        if(choice == 1) {
+            cout << "Enter the number of Items: " << endl;
+            cin >> n;
+            Item items[n];
+            cout << "Enter details of item :" << endl;
+            for(int i = 0; i < n; i++) {
+                cout << "Item " << i + 1 << "(Profit Weight)";
+                cin >> items[i].profit >> items[i].weight;
+            }
+            cout << "\nMaximum Profit : " << fractionalKnapsack(W, items, n) << endl;
+        }   
+       
+    } while(choice != 2);  
+
+
+    // Item items[] = {{60, 10}, {100, 20}, {120, 30}};
+    
+    
+    
+    return 0;
 }
