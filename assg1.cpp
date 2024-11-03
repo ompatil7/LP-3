@@ -1,13 +1,11 @@
-// 1. Write a program to calculate Fibonacci numbers and find its step count.
-
+// // 1. Write a program to calculate Fibonacci numbers and find its step count.
 #include <iostream>
 using namespace std;
 
-int stepCount = 0;
-
+int stepcount = 0;
 
 int fib(int n) {
-    stepCount++;
+    stepcount++;
 
     if(n == 0)
         return 0;
@@ -17,38 +15,53 @@ int fib(int n) {
     return fib(n - 1) + fib(n - 2);
 }
 
-int main() {
-    int n;
-    int choice;
+int iterativeFib(int n) {
+    int sc = 0;
+    if (n == 0) return 0;
+    if (n == 1) return 1;
 
-
-    do { 
-        cout << "Menu: " << endl;
-        cout << "1. Calculate Fibonacci numbers" << endl;
-        // cout << "2. Print all Fibonacci numbers" << endl;
-        cout << "3. Exit" << endl;
-        cout << "Enter your choice: ";
-        cin >> choice;
-
-        if(choice == 1) {
-            stepCount = 0;
-            cout << "Enter the number: ";
-            cin >> n;
-            cout << "Fibonacci number: " << fib(n) << endl;
-            cout << "Step count: " << stepCount << endl;    
-        }   
-       
-    } while(choice != 3);  
-
-    return 0;
+    int a = 0, b = 1, c;
+    for (int i = 2; i <= n; i++) {
+        sc++;
+        c = a + b;
+        a = b;
+        b = c;
+    }
+    return b;
 }
-// if want to print all the series of fibonacci
-//  if(choice == 2) {
-//     stepCount = 0;
-//     cout << "Enter until the number: ";
-//     cin >> n;
-//     for(int i = 0; i < n; i++) {
-//         cout << "Fibonacci number: " << fib(i) << endl;
-//     }
-//     cout << "Step count: " << stepCount << endl;    
-// }
+
+int main() {
+    int choice;
+    int n;
+
+    do {
+        cout << "1. Calculate fibonacci " << endl;
+        cout << "2. Print all " << endl;
+        cout << "3. Exit " << endl;
+        cout << "Enter :  " << endl;
+        cin >> choice;
+        switch(choice) {
+            case 1:
+                cout << "Enter n : ";
+                cin >> n;
+                cout << "Fibonacci number : " << fib(n) << endl;
+                break;
+            case 2:
+                cout << "Enter n : ";
+                cin >> n;
+                for (int i = 0; i <= n; i++) {
+                    cout << fib(i) << " | ";
+        
+                }
+                cout << endl;
+                break;
+            case 3:
+                break;
+                
+            default:
+                cout << "Enter valid choice" << endl;
+                break;
+        }
+
+        } while (choice != 3);
+}
