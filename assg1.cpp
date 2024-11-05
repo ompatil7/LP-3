@@ -41,27 +41,65 @@ int main() {
         cout << "Enter :  " << endl;
         cin >> choice;
         switch(choice) {
+            
             case 1:
                 cout << "Enter n : ";
                 cin >> n;
-                cout << "Fibonacci number : " << fib(n) << endl;
+                cout << "Fibonacci number : " << iterativeFib(n) << endl;
                 break;
+            
             case 2:
                 cout << "Enter n : ";
                 cin >> n;
                 for (int i = 0; i <= n; i++) {
-                    cout << fib(i) << " | ";
-        
+                    cout << iterativeFib(i) << " | ";
                 }
                 cout << endl;
                 break;
+            
             case 3:
-                break;
-                
+                break;                
+            
             default:
                 cout << "Enter valid choice" << endl;
                 break;
         }
-
-        } while (choice != 3);
+    
+    } while (choice != 3);
 }
+
+
+
+/*
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function to calculate the nth Fibonacci number using DP
+int fibonacci(int n) {
+    if (n <= 1) return n; // Base cases
+
+    vector<int> dp(n + 1); // DP array to store Fibonacci numbers
+    dp[0] = 0; // F(0)
+    dp[1] = 1; // F(1)
+
+    // Fill the DP array
+    for (int i = 2; i <= n; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2]; // F(n) = F(n-1) + F(n-2)
+    }
+
+    return dp[n]; // Return the nth Fibonacci number
+}
+
+int main() {
+    int n;
+    cout << "Enter a positive integer: ";
+    cin >> n;
+
+    int result = fibonacci(n); // Calculate Fibonacci
+    cout << "Fibonacci number F(" << n << ") = " << result << endl;
+
+    return 0;
+}
+*/
